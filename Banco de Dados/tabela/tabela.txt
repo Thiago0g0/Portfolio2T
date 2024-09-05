@@ -1,0 +1,34 @@
+create table leitor (
+matricula serial PRIMARY KEY,
+telefone VARCHAR (50),
+endereco TEXT,
+tipo VARCHAR (50)
+)
+
+
+create table livro (
+ISBN VARCHAR (50) PRIMARY KEY,
+titulo VARCHAR (50),
+autor VARCHAR (50),
+assunto VARCHAR (50),
+editora VARCHAR (50),
+quantidade INT
+)
+
+create table exemplar (
+id serial PRIMARY KEY,
+id_livro INT,
+estante INT,
+prateleira INT,
+FOREIGN KEY (id_livro) REFERENCES livro (id)
+)
+
+create table emprestimo (
+id serial PRIMARY KEY,
+id_exemplar INT,
+matricula_leitor INT,
+data DATE,
+data_devolucao DATE,
+FOREIGN KEY (id_exemplar) REFERENCES exemplar (id),
+FOREIGN KEY (matricula_leitor) REFERENCES leitor(id)
+)
